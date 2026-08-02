@@ -1,0 +1,20 @@
+services:
+  storboard:
+    build: .
+    container_name: storboard
+    ports:
+      - "1338:1337"
+    volumes:
+      # Recommended: mount the whole host filesystem read-only so every
+      # real drive/partition is visible. Storboard filters out virtual
+      # filesystems (proc, sysfs, tmpfs, overlay, etc.) automatically.
+      - /mnt/2TB-1:/drive1:ro
+      - /mnt/2TB-2:/drive2:ro
+      - /mnt/3TB:/drive3:ro
+      - /mnt/D:/drive4:ro
+      - /mnt/E:/drive5:ro
+      # Alternative: mount specific drives individually instead of the
+      # line above. Each one shows up as its own card.
+      # - /mnt/drive1:/drive1:ro
+      # - /mnt/drive2:/drive2:ro
+    restart: unless-stopped

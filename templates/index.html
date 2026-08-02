@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=MedievalSharp&family=Bangers&family=Luckiest+Guy&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="backdrop" id="backdrop"></div>
+
+<div class="theme-switcher" id="themeSwitcher">
+  <button class="theme-toggle" id="themeToggleBtn">
+    <span>🎨</span>
+    <span id="themeToggleLabel">Theme</span>
+    <span class="chev">▾</span>
+  </button>
+  <div class="theme-panel" id="themePanel"></div>
+</div>
+
+<header>
+  <div class="header-symbol" id="headerSymbol"></div>
+  <h1 id="headerTitle"></h1>
+  <div class="subtitle" id="headerSubtitle"></div>
+</header>
+
+<div class="dashboard" id="dashboard">
+  <div class="overall-section" id="overallSection"></div>
+  <div class="section-title">
+    <h2 id="sectionTitleText"></h2>
+    <span class="line"></span>
+  </div>
+  <div class="disk-grid" id="diskGrid">
+    <div class="empty-state">
+      <div class="icon">⏳</div>
+      Loading...
+    </div>
+  </div>
+</div>
+
+<footer id="footerText"></footer>
+
+<script src="{{ url_for('static', filename='themes.js') }}"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
