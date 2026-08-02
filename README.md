@@ -7,6 +7,8 @@ Point it at your drives, choose a theme, and Storboard automatically renames and
 Theme switching is completely client-side with **no page reload or server restart**, and your preferred theme is remembered in your browser.
 
 ---
+AI Disclaimer: Claude Code was used in the making of this.
+---
 
 ## ✨ Features
 
