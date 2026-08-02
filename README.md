@@ -93,30 +93,59 @@ There is **no build process**.
 
 ### Docker Compose (Recommended)
 
+Pull the pre-built image straight from GHCR—no build step required:
+
+```yaml
+services:
+  storboard:
+    image: ghcr.io/scopeddlol/storboard:latest
+    container_name: storboard
+    ports:
+      - "1338:1337"
+    volumes:
+      # Mount each drive you want tracked as its own read-only volume.
+      # Every mount shows up as its own card in the dashboard.
+      - /mnt/2TB-1:/drive1:ro
+      - /mnt/2TB-2:/drive2:ro
+      - /mnt/3TB:/drive3:ro
+      - /mnt/D:/drive4:ro
+      - /mnt/E:/drive5:ro
+    restart: unless-stopped
+```
+
 ```bash
 docker compose up -d
 ```
 
-By default, the entire host filesystem is mounted read-only at:
+Then open:
 
 ```text
-/host
+http://localhost:1338
 ```
 
-This allows Storboard to detect every physical drive and partition while automatically filtering out virtual filesystems such as:
-
-* proc
-* sysfs
-* tmpfs
-* overlay
-* devtmpfs
-* squashfs
-
-If you'd rather expose only specific drives, edit `docker-compose.yml` and replace the default mount with individual volumes.
+> **Prefer full host visibility instead?** Mount the whole host filesystem read-only at `/host` in place of the individual drive volumes above, and Storboard will auto-detect every physical drive and partition while filtering out virtual filesystems (`proc`, `sysfs`, `tmpfs`, `overlay`, `devtmpfs`, `squashfs`, etc.).
 
 ---
 
 ### Docker
+
+```bash
+docker pull ghcr.io/scopeddlol/storboard:latest
+
+docker run -d \
+  --name storboard \
+  -p 1338:1337 \
+  -v /mnt/2TB-1:/drive1:ro \
+  -v /mnt/2TB-2:/drive2:ro \
+  -v /mnt/3TB:/drive3:ro \
+  -v /mnt/D:/drive4:ro \
+  -v /mnt/E:/drive5:ro \
+  ghcr.io/scopeddlol/storboard:latest
+```
+
+---
+
+### Building From Source
 
 ```bash
 docker build -t storboard .
